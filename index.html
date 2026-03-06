@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday</title>
+<style>
+body{
+margin:0;
+overflow:hidden;
+background:black;
+color:#ff4da6;
+font-family:monospace;
+text-align:center;
+}
+#matrix{
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+z-index:-1;
+}
+.container{
+padding-top:150px;
+}
+#countdown{
+font-size:60px;
+color:pink;
+}
+#message{
+display:none;
+font-size:50px;
+animation:glow 2s infinite;
+}
+@keyframes glow{
+0%{text-shadow:0 0 10px pink;}
+50%{text-shadow:0 0 40px pink;}
+100%{text-shadow:0 0 10px pink;}
+}
+#emoji{
+display:none;
+font-size:80px;
+animation:float 3s infinite;
+}
+@keyframes float{
+0%{transform:translateY(0);} 
+50%{transform:translateY(-20px);} 
+100%{transform:translateY(0);} 
+}
+#album{
+display:none;
+margin-top:50px;
+}
+.book{
+width:300px;
+height:200px;
+border-radius:20px;
+overflow:hidden;
+background:white;
+color:black;
+padding:20px;
+}
+.book img{
+width:100%;
+border-radius:15px;
+}
+.heart{
+font-size:200px;
+color:pink;
+display:none;
+}
+</style>
+</head>
+<body>
+<canvas id="matrix"></canvas>
+<div class="container">
+<div id="countdown">10</div>
+<div id="message">💖 happy birthday to hayat 💖</div>
+<div id="emoji">🎂🤍🧸</div>
+<div id="album">
+<div class="book">
+<h3>كلمات جميلة</h3>
+<p>كل عام وانتِ اجمل وأغلى انسانة ✨</p>
+<img src="https://via.placeholder.com/250" />
+</div>
+</div>
+<div class="heart">❤️</div>
+</div>
+<script>
+// Matrix effect
+const canvas=document.getElementById('matrix');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+const letters="0123456789ABCDEF";
+const fontSize=16;
+const columns=canvas.width/fontSize;
+const drops=Array(Math.floor(columns)).fill(1);
+function draw(){
+ctx.fillStyle="rgba(0,0,0,0.05)";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="#ff4da6";
+ctx.font=fontSize+"px monospace";
+for(let i=0;i<drops.length;i++){
+let text=letters[Math.floor(Math.random()*letters.length)];
+ctx.fillText(text,i*fontSize,drops[i]*fontSize);
+if(drops[i]*fontSize>canvas.height && Math.random()>0.975)
+drops[i]=0;
+drops[i]++;
+}
+}
+setInterval(draw,50);// Countdown let time=10; const countdown=document.getElementById('countdown'); const msg=document.getElementById('message'); const emoji=document.getElementById('emoji'); const album=document.getElementById('album'); const heart=document.querySelector('.heart');
+
+let interval=setInterval(()=>{ time--; countdown.textContent=time; if(time<=0){ clearInterval(interval); countdown.style.display="none"; msg.style.display="block"; setTimeout(()=>{emoji.style.display="block";},2000); setTimeout(()=>{album.style.display="block";},5000); setTimeout(()=>{heart.style.display="block";},8000); } },1000); </script>
+
+</body>
+</html>
